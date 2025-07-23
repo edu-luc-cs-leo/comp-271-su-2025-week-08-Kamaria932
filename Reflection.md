@@ -1,0 +1,1 @@
+No homework was due on Week 7.
