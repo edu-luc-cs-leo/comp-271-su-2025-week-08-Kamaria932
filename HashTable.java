@@ -61,8 +61,6 @@ private double currentLoadFactor() {
 private boolean overLimit() {
     return currentLoadFactor() >= LOAD_FACTOR_THRESHOLD; // Limit is over 0.75
 } 
-
-private 
     /*
     *
      * Adds a node, with the specified content, to a linked list in the underlying
@@ -74,7 +72,7 @@ private
         if (content == null) //prevent a null exception error.
         return;
 
-        if (overLimit()) expandtable(); //if it is over limit increase the size of the table's data.
+        if (overLimit()) expandTable(); //if it is over limit increase the size of the table's data.
 
         // Create the new node to add to the hashtable
         Node<E> newNode = new Node<E>(content);
@@ -98,7 +96,7 @@ private
         this.totalNodes += 1;
 
         this.loadFactor = currentLoadFactor(); //The current load factor number should be equivalent to the load factor being checked.
-        if (overLimit()) expandtable(); //if it passes the thresehold enlarge the array.
+        if (overLimit()) expandTable(); //if it passes the thresehold enlarge the array.
     } // method add
 
     /**
@@ -116,27 +114,25 @@ private
     public boolean contains(E element) {
         boolean found = false; //the searched element was not found.
         if (element != null) { //avoid a null pointer exception
-        int position = Math.abs(element.hashcode()) //should give an integer number for the element.
-            % this.underlyinglength; //any index from 0 up to underlyinglength - 1.
+        int position = Math.abs(element.hashCode()) % this.underlying.length; //should give an integer number for the element. Any index from 0 up to underlyinglength - 1.
             Node<E> cursor = this.underlying[position]; //points at the first node in the slot. This is the position.
             while (cursor != null && !found) { //make sure you are searching for a valid node.
                   if (element.equals(cursor.getContent())) { //Check and compare if the element that was being searched is spotted.
         found = true;
     } else {
         cursor = cursor.getNext(); //if it is not found keep searching through the array.
+        }
     }
 }
-return found;
-            }
+    return found;
+    }
 
-            private void expandtable() {
-                Node<e>[] old = this.underlying //remember the current array
+            private void expandTable() {
+                Node<E>[] old = this.underlying; //remember the current array
                 int newSize = old.length * 2; //double the new array to make it larger.
                 this.underlying = new Node[newSize];//create an empty expanded array.
                 this.usage = 0; //clear or reset the slots that have been used.
-            }
-        }
-    } // method contains
+        } // method contains
 
     /** Constants for toString */
     private static final String LINKED_LIST_HEADER = "\n[ %2d ]: ";
