@@ -137,7 +137,9 @@ private boolean overLimit() {
                     Node<E> cursor = head; //start at the head node.
                 while (cursor != null) { 
                     Node<E> next = cursor.getNext(); //remember the rest of the chain
-                    cursor.setNext(null); 
+                    cursor.setNext(null);
+                    
+                     cursor = next;
                     }
     }//method contains
 } 
