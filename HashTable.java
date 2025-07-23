@@ -113,11 +113,21 @@ private
      *         underlying array; false otherwise.
      */
     /*Figure out where the element should go within the array. */
-    public boolean contains(E target) {
+    public boolean contains(E element) {
         boolean found = false; //the searched element was not found.
         if (element != null) { //avoid a null pointer exception
         int position = Math.abs(element.hashcode()) //should give an integer number for the element.
             % this.underlyinglength; //any index from 0 up to underlyinglength - 1.
+            Node<E> cursor = this.underlying[position]; //points at the first node in the slot. This is the position.
+            while (cursor != null && !found) { //make sure you are searching for a valid node.
+                  if (element.equals(cursor.getContent())) { Check and compare if the element that was being searched is spotted.
+        found = true;
+    } else {
+        cursor = cursor.getNext(); //if it is not found keep searching through the array.
+    }
+}
+return found;
+            }
         }
     } // method contains
 
