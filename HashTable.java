@@ -128,6 +128,13 @@ private
 }
 return found;
             }
+
+            private void expandtable() {
+                Node<e>[] old = this.underlying //remember the current array
+                int newSize = old.length * 2; //double the new array to make it larger.
+                this.underlying = new Node[newSize];//create an empty expanded array.
+                this.usage = 0; //clear or reset the slots that have been used.
+            }
         }
     } // method contains
 
