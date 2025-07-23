@@ -120,7 +120,7 @@ private
             % this.underlyinglength; //any index from 0 up to underlyinglength - 1.
             Node<E> cursor = this.underlying[position]; //points at the first node in the slot. This is the position.
             while (cursor != null && !found) { //make sure you are searching for a valid node.
-                  if (element.equals(cursor.getContent())) { Check and compare if the element that was being searched is spotted.
+                  if (element.equals(cursor.getContent())) { //Check and compare if the element that was being searched is spotted.
         found = true;
     } else {
         cursor = cursor.getNext(); //if it is not found keep searching through the array.
