@@ -1,7 +1,7 @@
 public class Implement_HashTable {
     public static void main(String[] args) {
-        // HashTable<String> demo = new HashTable<>();
-        nfs_HashTable<String> demo = new nfs_HashTable<>();
+        HashTable<String> demo = new HashTable<>(); //In class Prof. Leo stated to comment line 4 and uncomment line 3.
+        //nfs_HashTable<String> demo = new nfs_HashTable<>();
         demo.add("Alena");
         demo.add("William");
         demo.add("Bryanna");
