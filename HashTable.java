@@ -38,7 +38,7 @@ public class HashTable<E extends Comparable<E>> {
     public HashTable(int size) {
         if (size <= 0)
             size = DEFAULT_SIZE;
-        this.underlying = new Node[size];
+        this.underlying = (Node<E>[]) new Node[size];
         this.usage = 0;
         this.totalNodes = 0;
         this.loadFactor = 0.0;
@@ -59,7 +59,7 @@ private double currentLoadFactor() {
 }
 
 private boolean overLimit() {
-    return currentLoadFactor() >= LOAD_FACTOR_THRESHOLD; // Limit is over 0.75
+    return this.loadFactor >= LOAD_FACTOR_THRESHOLD; // Limit is over 0.75
 } 
     /*
     *
@@ -124,15 +124,23 @@ private boolean overLimit() {
         }
     }
 }
-    return found;
+        return found;
     }
 
-            private void expandTable() {
+        private void expandTable() {
                 Node<E>[] old = this.underlying; //remember the current array
                 int newSize = old.length * 2; //double the new array to make it larger.
-                this.underlying = new Node[newSize];//create an empty expanded array.
+                this.underlying = (Node<E>[]) new Node[newSize];//create an empty expanded array.
                 this.usage = 0; //clear or reset the slots that have been used.
-        } // method contains
+
+                for (Node<E> head : old) {  //check each slot of the old array.
+                    Node<E> cursor = head; //start at the head node.
+                while (cursor != null) { 
+                    Node<E> next = cursor.getNext(); //remember the rest of the chain
+                    cursor.setNext(null); 
+                    }
+    }//method contains
+} 
 
     /** Constants for toString */
     private static final String LINKED_LIST_HEADER = "\n[ %2d ]: ";
@@ -151,13 +159,13 @@ private boolean overLimit() {
         // Iterate the array
         for (int i = 0; i < underlying.length; i++) {
             sb.append(String.format(LINKED_LIST_HEADER, i));
-            Node head = this.underlying[i];
+            Node<E> head = this.underlying[i];
             if (head == null) {
                 // message that this position is empty
                 sb.append(EMPTY_LIST_MESSAGE);
             } else {
                 // traverse the linked list, displaying its elements
-                Node cursor = head;
+                Node<E> cursor = head;
                 while (cursor != null) {
                     // update sb
                     sb.append(String.format(NODE_CONTENT, cursor));
