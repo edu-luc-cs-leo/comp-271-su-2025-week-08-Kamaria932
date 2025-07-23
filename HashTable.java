@@ -48,8 +48,20 @@ public class HashTable<E extends Comparable<E>> {
     public HashTable() {
         this(DEFAULT_SIZE);
     } // default constructor
+    
+/*Helper method for load factor data. Take the usage and divide by array length. 
+ *Usage = the current slots that are filled, how many nodes take up a position. 
+ *Underlying is the toal # of slots that can be used.
+ * Load factor should tell how many total slots are filled within the array.
+*/
+private double currentLoadFactor() {
+    return (double) this.usage / this.underlying.length;
+}
 
-    /**
+
+private 
+    /*
+    *
      * Adds a node, with the specified content, to a linked list in the underlying
      * array.
      * 
