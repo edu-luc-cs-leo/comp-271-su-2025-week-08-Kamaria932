@@ -112,8 +112,13 @@ private
      * @return true if target value is present in one of the linked lists of the
      *         underlying array; false otherwise.
      */
+    /*Figure out where the element should go within the array. */
     public boolean contains(E target) {
-        return false;
+        boolean found = false; //the searched element was not found.
+        if (element != null) { //avoid a null pointer exception
+        int position = Math.abs(element.hashcode()) //should give an integer number for the element.
+            % this.underlyinglength; //any index from 0 up to underlyinglength - 1.
+        }
     } // method contains
 
     /** Constants for toString */
