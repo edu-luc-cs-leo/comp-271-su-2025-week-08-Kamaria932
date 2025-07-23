@@ -71,6 +71,11 @@ private
      * @param content E The content of a new node, to be placed in the array.
      */
     public void add(E content) {
+        if (content == null) //prevent a null exception error.
+        return;
+
+        if (overLimit()) expandtable(); //if it is over limit increase the size of the table's data.
+
         // Create the new node to add to the hashtable
         Node<E> newNode = new Node<E>(content);
         // Use the hashcode for the new node's contents to find where to place it in the
@@ -91,6 +96,9 @@ private
         }
         // Update the number of nodes
         this.totalNodes += 1;
+
+        this.loadFactor = currentLoadFactor(); //The current load factor number should be equivalent to the load factor being checked.
+        if (overLimit()) expandtable(); //if it passes the thresehold enlarge the array.
     } // method add
 
     /**
