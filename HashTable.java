@@ -126,7 +126,11 @@ private boolean overLimit() {
 }
         return found;
     }
-
+/* Compute the slot index for this node in the expanded array. 
+  If that slot is still empty, increment the counter of occupied slots. 
+  Insert the node at the front of the slot’s list so it becomes the new head.
+  After all moves, recalculate the load factor to match the expanded table.
+*/
         private void expandTable() {
                 Node<E>[] old = this.underlying; //remember the current array
                 int newSize = old.length * 2; //double the new array to make it larger.
@@ -136,12 +140,19 @@ private boolean overLimit() {
                 for (Node<E> head : old) {  //check each slot of the old array.
                     Node<E> cursor = head; //start at the head node.
                 while (cursor != null) { 
-                    Node<E> next = cursor.getNext(); //remember the rest of the chain
+                    Node<E> next = cursor.getNext(); //remember the rest of the array.
                     cursor.setNext(null);
                     
-                     cursor = next;
+                    int position = Math.abs(cursor.getContent().hashCode()) % newSize; //slot index in the new array.
+                if (this.underlying[position] == null) {
+                    this.usage++;  //increase count of unused slots.                                       
+                }
+                    cursor.setNext(this.underlying[position]);                          
+                    this.underlying[position] = cursor; //The pointer is now at the head.
+                    cursor = next;        
                     }
-    }//method contains
+                this.loadFactor = currentLoadFactor(); //Refresh load factor after position placements.
+                    }
 } 
 
     /** Constants for toString */
