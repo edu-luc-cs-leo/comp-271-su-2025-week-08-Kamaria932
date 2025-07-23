@@ -48,7 +48,7 @@ public class HashTable<E extends Comparable<E>> {
     public HashTable() {
         this(DEFAULT_SIZE);
     } // default constructor
-    
+
 /*Helper method for load factor data. Take the usage and divide by array length. 
  *Usage = the current slots that are filled, how many nodes take up a position. 
  *Underlying is the toal # of slots that can be used.
@@ -58,6 +58,9 @@ private double currentLoadFactor() {
     return (double) this.usage / this.underlying.length;
 }
 
+private boolean overLimit() {
+    return currentLoadFactor() >= LOAD_FACTOR_THRESHOLD; // Limit is over 0.75
+} 
 
 private 
     /*
